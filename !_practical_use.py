@@ -1,3 +1,5 @@
+# start with python 3
+
 import sys, os
 sys.path.append("../..")
 # import facerec modules
@@ -13,6 +15,7 @@ import numpy as np
 from PIL import Image
 import matplotlib.cm as cm
 import logging
+
 
 def read_images(path, sz=None):
     """Reads the images in a given folder, resizes images on the fly if size is given.
@@ -35,12 +38,12 @@ def read_images(path, sz=None):
             for filename in os.listdir(subject_path):
                 try:
                     im = Image.open(os.path.join(subject_path, filename))
-                    im = im.convert("L")
+                    im = im.convert("L")  # конвертируем в оттенки серого
                     # resize to given size (if given)
                     if sz is not None:
-                        im = im.resize(sz, Image.ANTIALIAS)
-                    X.append(np.asarray(im, dtype=np.uint8))
-                    y.append(c)
+                        im = im.resize(sz, Image.ANTIALIAS)  # высококачественный фильтр понижающей дискретизации
+                    X.append(np.asarray(im, dtype=np.uint8))  # сохраняем в памяти
+                    y.append(c)  # новер партии в массиве
                 except IOError as ioe:
                     print("I/O error {0}".format(ioe))
                 except Exception as exep:
@@ -48,32 +51,6 @@ def read_images(path, sz=None):
                     raise
             c = c+1
     return [X,y]
-
-
-def read_img(paths, sz=None):
-    c = 0
-    X, y = [], []
-    # paths = [
-    #     r'C:\Users\Worker\Pycharm\Projects\facerec\files'
-    #     r'\Painting_Art_Sunrises_and_sunsets_Mountains_Deer_529666_3840x2400.jpg',
-    #     r'C:\Users\Worker\Pycharm\Projects\facerec\files\zagruzhennoe--1.jpg'
-    # ]
-    for filename in paths:
-        try:
-            im = Image.open(filename)
-            im = im.convert("L")
-            # resize to given size (if given)
-            if sz is not None:
-                im = im.resize(sz, Image.ANTIALIAS)
-            X.append(np.asarray(im, dtype=np.uint8))
-            y.append(c)
-        except IOError as ioe:
-            print("I/O error {0}".format(ioe))
-        except Exception as exep:
-            print("Unexpected error:", exep)
-            raise
-    c = c + 1
-    return [X, y]
 
 
 if __name__ == "__main__":
@@ -87,12 +64,12 @@ if __name__ == "__main__":
     #     print("USAGE: facerec_demo.py </path/to/images>")
     #     sys.exit()
     # Now read in the image data. This must be a valid path!
-    [X, y] = read_images(r'C:\Users\Worker\Pycharm\Projects\facerec\files')
-    [X, y] = read_img(paths=[
-        r'C:\Users\Worker\Pycharm\Projects\facerec\files'
-        r'\Painting_Art_Sunrises_and_sunsets_Mountains_Deer_529666_3840x2400.jpg',
-        r'C:\Users\Worker\Pycharm\Projects\facerec\files\zagruzhennoe--1.jpg'
-    ])
+    [X, y] = read_images(r'/Users/owl/Pycharm/PycharmProjects/my_facerec/files/faces')
+    # [X, y] = read_img(paths=[
+    #     r'C:\Users\Worker\Pycharm\Projects\facerec\files'
+    #     r'\Painting_Art_Sunrises_and_sunsets_Mountains_Deer_529666_3840x2400.jpg',
+    #     r'C:\Users\Worker\Pycharm\Projects\facerec\files\zagruzhennoe--1.jpg'
+    # ])
     # Then set up a handler for logging:
     handler = logging.StreamHandler(sys.stdout)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')

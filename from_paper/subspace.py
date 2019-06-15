@@ -25,8 +25,8 @@ def pca(x, y, num_components=0):
     eigenvalues = eigenvalues[idx]
     eigenvectors = eigenvectors[:, idx]
     # select only num_components
-    eigenvalues = eigenvalues[0: num_components].copy()
-    eigenvectors = eigenvectors[:, 0: num_components].copy()
+    eigenvalues = eigenvalues[0: num_components[0]].copy()  # num_components[0 or 1]
+    eigenvectors = eigenvectors[:, 0: num_components[0]].copy()  # num_components[0 or 1]
     return [eigenvalues, eigenvectors, mu]
 
 

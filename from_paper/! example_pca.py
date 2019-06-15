@@ -18,7 +18,7 @@ sys.path.append("..")
 # read images
 
 
-[x, y] = read_images(r"C:\Users\Worker\Pycharm\Projects\facerec\files")
+[x, y] = read_images(r"/Users/owl/Pycharm/PycharmProjects/my_facerec/files/faces")
 # perform a full pca
 [D, W, mu] = pca(as_row_matrix(x), y)
 
