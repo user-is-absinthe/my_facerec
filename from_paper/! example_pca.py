@@ -31,7 +31,8 @@ for i in range(min(len(x), 16)):
     E.append(normalize(e, 0, 255))
 # plot them and store the plot to " python_eigenfaces .pdf"
 subplot(
-    title=" Eigenfaces AT&T Facedatabase ", images=E, rows=4, cols=4, sptitle="Eigenface", colormap=cm.jet
+    title=" Eigenfaces AT&T Facedatabase ", images=E, rows=4, cols=4, sptitle="Eigenface", colormap=cm.jet,
+    filename='/Users/owl/Pycharm/PycharmProjects/my_facerec/files/1.png'
 )
 
 
@@ -48,6 +49,7 @@ for i in range(min(len(steps), 16)):
     # plot them and store the plot to " python_reconstruction . pdf "
 subplot(
     title=" Reconstruction AT&T Facedatabase ", images=E, rows=4, cols=4,
-    sptitle="Eigenvectors", sptitles=steps, colormap=cm.gray
+    sptitle="Eigenvectors", sptitles=steps, colormap=cm.gray,
+    filename='/Users/owl/Pycharm/PycharmProjects/my_facerec/files/2.png'
 )
 
